@@ -23,7 +23,7 @@ class CSVSerializer extends AbstractSerializer
     /**
      * @var string CSV delimiter char
      */
-    protected $delimiter = ',';
+    protected $delimiter = ';';
 
     /**
      * @var string CSV enclosure char
