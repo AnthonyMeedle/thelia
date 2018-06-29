@@ -535,7 +535,10 @@ class OrderController extends BaseFrontController
             }
         }
 
-        $address = AddressQuery::create()->findPk($session->getOrder()->getChoosenDeliveryAddress());
+        if(null === $address = AddressQuery::create()->findPk($session->getOrder()->getChoosenDeliveryAddress())){
+			$address = AddressQuery::create()->filterByCustomerId($session->getCustomerUser()->getId())->filterByIsDefault(1)->findOne();
+			$session->getOrder()->setChoosenDeliveryAddress($address->getId());
+		}
 
         $countryId = $address->getCountryId();
         $stateId = $address->getStateId();
