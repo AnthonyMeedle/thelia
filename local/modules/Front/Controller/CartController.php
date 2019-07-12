@@ -100,6 +100,8 @@ class CartController extends BaseFrontController
 
             if ($this->getRequest()->isXmlHttpRequest()) {
                 $this->changeViewForAjax();
+            } elseif (null !== $response = $this->generateSuccessRedirect()) {
+                return $response;
             }
         } catch (\Exception $e) {
             Tlog::getInstance()->error(sprintf("Failed to change cart item quantity: %s", $e->getMessage()));
